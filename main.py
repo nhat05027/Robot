@@ -13,7 +13,7 @@ a = np.array([0, 100, 100])
 alpha = np.array([pi/2, 0, 0])
 
 theta = np.array([0, 0, 0])
-offsetTheta = np.array([pi/18, pi/9, pi/36])
+offsetTheta = np.array([0, 0, 0])
 limitTheta = np.array([[-pi/2, pi/2], [-pi/2, pi/2], [-pi/2, pi/2]])
 animateArray = np.array([])
 travelArray = np.array([])
@@ -42,7 +42,7 @@ baseX = np.array([50, 0, 0])
 baseY = np.array([0, 50, 0])
 baseZ = np.array([0, 0, 50])
 
-scale = 2
+scale = 1.5
 angleX = -3*pi/4
 angleY = 0
 angleZ = -pi/4
@@ -137,12 +137,26 @@ def updateTheta():
     T = updateTranposeMatrix()
     for i in range(2):
         guiCoor[i].set(coor2str(DHtranspose(baseO, T[i+2])))
+    guiRPY.set(calRPY(T[3]))
 
     travelArray = np.append(travelArray, DHtranspose(baseO, T[3]))
     return T
 
 def coor2str(coor):
     return str(round(coor[0], 3)) + " | " + str(round(coor[1], 3)) + " | " + str(round(coor[2], 3))
+
+def calRPY(T):
+    pitch = atan2(-T[2][0], sqrt(T[2][1]**2 + T[2][2]**2))
+    if pitch == pi/2:
+        yaw = 0
+        rall = atan2(T[0][1], T[1][1])
+    elif pitch == -pi/2:
+        yaw = 0
+        rall = -atan2(T[0][1], T[1][1])
+    else:
+        yaw = atan2(T[1][0]/cos(pitch), T[0][0]/cos(pitch))
+        rall = atan2(T[2][1]/cos(pitch), T[2][2]/cos(pitch))
+    return str(round(rall*180/pi, 3)) + " | " + str(round(pitch*180/pi, 3)) + " | " + str(round(yaw*180/pi, 3))
 
 clock = pygame.time.Clock()
 def pygameMain():
@@ -199,6 +213,7 @@ guiOpacity.set(125)
 isDrawCoor.set(1)
 isDrawTravel.set(1)
 guiCoor = [StringVar(), StringVar()]
+guiRPY = StringVar()
 
 def updateGuiVariable():
     global guiTheta
@@ -234,6 +249,8 @@ Label(frameView, text="Joint 2", font='Helvetica 10').grid(row=3, column=0)
 Label(frameView, textvariable=guiCoor[0], font='Helvetica 10').grid(row=3, column=1)
 Label(frameView, text="Tool", font='Helvetica 10').grid(row=4, column=0)
 Label(frameView, textvariable=guiCoor[1], font='Helvetica 10').grid(row=4, column=1)
+Label(frameView, text="Angle R | P | Y", font='Helvetica 10', fg="red").grid(row=5, columnspan = 3, column=0)
+Label(frameView, textvariable=guiRPY, font='Helvetica 10').grid(row=6, column=1)
 
 frameForw = LabelFrame(root, text='Forward Kinematic', padx=10, pady=10)
 frameForw.grid(row=1, column=0)
