@@ -3,6 +3,7 @@ from math import *
 import time
 import pygame
 from tkinter import *
+import tkinter.messagebox 
 
 # % Link | d   | theta        |   a   | alpha
 # % 1      d1    theta_1         0       90
@@ -206,6 +207,7 @@ root = Tk()
 root.title("Control Panel")
 
 guiTheta = [DoubleVar(), DoubleVar(), DoubleVar()]
+guiCoorInv = [DoubleVar(), DoubleVar(), DoubleVar()]
 guiOpacity = DoubleVar()
 isDrawCoor = IntVar()
 isDrawTravel = IntVar()
@@ -219,11 +221,8 @@ def updateGuiVariable():
     global guiTheta
     for i in range(len(guiTheta)):
         guiTheta[i].set(theta[i]*180/pi)
-def forwardKine():
+def animateTranform(nextTheta, stepAngle, deltaTime):
     global animateArray, travelArray
-    deltaTime = 60
-    nextTheta = np.array([guiTheta[0].get()*pi/180, guiTheta[1].get()*pi/180, guiTheta[2].get()*pi/180])
-    stepAngle = np.array([(nextTheta[0]-theta[0])/deltaTime, (nextTheta[1]-theta[1])/deltaTime, (nextTheta[2]-theta[2])/deltaTime])
     temp = np.array([0, 0, 0])
     for j in range(deltaTime):
         temp = temp+stepAngle
@@ -231,6 +230,41 @@ def forwardKine():
     animateArray = np.append(animateArray, nextTheta)
     animateArray = np.reshape(animateArray, (-1,3))
     travelArray = np.array([])
+def forwardKine():
+    deltaTime = 60
+    nextTheta = np.array([guiTheta[0].get()*pi/180, guiTheta[1].get()*pi/180, guiTheta[2].get()*pi/180])
+    stepAngle = np.array([(nextTheta[0]-theta[0])/deltaTime, (nextTheta[1]-theta[1])/deltaTime, (nextTheta[2]-theta[2])/deltaTime])
+    animateTranform(nextTheta, stepAngle, deltaTime)
+def inverseKine():
+    px = guiCoorInv[0].get()
+    py = guiCoorInv[1].get()
+    pz = guiCoorInv[2].get()-d[0]
+    # Check valid
+    valid = 0
+    tmp = (px**2+py**2+pz**2)**0.5
+    if (tmp <= a[1]+a[2]) and (tmp >= abs(a[1]-a[2])):
+        valid = 1
+    
+    # calculate
+    if valid:
+        c3 = (px**2+py**2+pz**2-a[1]**2-a[2]**2)/(2*a[1]*a[2])
+        s3 = (1-c3**2)**0.5
+        theta3 = atan2(s3, c3)
+
+        # c2 = (((px**2+py**2)**0.5)*(a[1]+a[2]*c3)+pz*a[2]*s3)/(a[1]**2+a[2]**2+2*a[1]*a[2]*c3)
+        # s2 = (((px**2+py**2)**0.5)*a[2]*s3+pz*(a[1]+a[2]*c3))/(a[1]**2+a[2]**2+2*a[1]*a[2]*c3)
+        # theta2 = atan2(s2, c2)
+        theta2 = atan2(pz, (px**2+py**2)**0.5) - acos((px**2+py**2+pz**2+a[1]**2-a[2]**2)/(2*a[1]*(px**2+py**2+pz**2)**0.5))
+
+        theta1 = atan2(py, px)
+
+        print(theta1*180/pi, theta2*180/pi, theta3*180/pi)
+        deltaTime = 60
+        nextTheta = np.array([theta1, theta2, theta3])
+        stepAngle = np.array([(nextTheta[0]-theta[0])/deltaTime, (nextTheta[1]-theta[1])/deltaTime, (nextTheta[2]-theta[2])/deltaTime])
+        animateTranform(nextTheta, stepAngle, deltaTime)
+    else:
+        tkinter.messagebox.showwarning("Inverse Kinematic.",  "Out of workspace")
 
 updateGuiVariable()
 frameView = LabelFrame(root, text='View', padx=10, pady=10)
@@ -262,5 +296,17 @@ for i in range(len(theta)):
     entry2 = Entry(frameForw, textvariable=guiTheta[i], width=5)
     entry2.grid(row=i+1, column=2)
 buttonForw = Button(frameForw, text="Execute", command=forwardKine, height=2, width=5).grid(row=4, column=2)
+
+frameInvrs = LabelFrame(root, text='Inverse Kinematic', padx=10, pady=10)
+frameInvrs.grid(row=2, column=0)
+Label(frameInvrs, text="Inverse Kinematic", font='Helvetica 10', fg="red").grid(row=0, columnspan = 3, column=0)
+for i, t in enumerate(["x ", "y ", "z "]):
+    Label(frameInvrs, text=t, font='Helvetica 10').grid(row=i+1, column=0)
+    # scale2 = Scale(frameForw, variable=guiTheta[i], showvalue=0, resolution=1,  from_ = -90, to = 90,  orient = HORIZONTAL, length=200) 
+    # scale2.grid(row=i+1, column=1)
+    entry3 = Entry(frameInvrs, textvariable=guiCoorInv[i], width=15)
+    entry3.grid(row=i+1, column=1)
+buttonInvrs = Button(frameInvrs, text="Execute", command=inverseKine, height=2, width=5).grid(row=4, column=2)
+
 while True:
     pygameMain()
