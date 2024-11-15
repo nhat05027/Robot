@@ -15,7 +15,7 @@ alpha = np.array([pi/2, 0, 0])
 
 theta = np.array([0, 0, 0])
 offsetTheta = np.array([0, 0, 0])
-limitTheta = np.array([[-pi/2, pi/2], [-pi/2, pi/2], [-pi/2, pi/2]])
+limitTheta = np.array([[-pi, pi], [-pi, pi], [-pi, pi]])
 animateArray = np.array([])
 travelArray = np.array([])
 
@@ -208,6 +208,7 @@ root.title("Control Panel")
 
 guiTheta = [DoubleVar(), DoubleVar(), DoubleVar()]
 guiCoorInv = [DoubleVar(), DoubleVar(), DoubleVar()]
+guiThetaInv = [DoubleVar(), DoubleVar(), DoubleVar()]
 guiOpacity = DoubleVar()
 isDrawCoor = IntVar()
 isDrawTravel = IntVar()
@@ -221,6 +222,7 @@ def updateGuiVariable():
     global guiTheta
     for i in range(len(guiTheta)):
         guiTheta[i].set(theta[i]*180/pi)
+        guiThetaInv[i].set(theta[i]*180/pi)
 def animateTranform(nextTheta, stepAngle, deltaTime):
     global animateArray, travelArray
     temp = np.array([0, 0, 0])
@@ -236,17 +238,15 @@ def forwardKine():
     stepAngle = np.array([(nextTheta[0]-theta[0])/deltaTime, (nextTheta[1]-theta[1])/deltaTime, (nextTheta[2]-theta[2])/deltaTime])
     animateTranform(nextTheta, stepAngle, deltaTime)
 def inverseKine():
+    global guiThetaInv
     px = guiCoorInv[0].get()
     py = guiCoorInv[1].get()
     pz = guiCoorInv[2].get()-d[0]
     # Check valid
     valid = 0
     tmp = (px**2+py**2+pz**2)**0.5
-    if (tmp <= a[1]+a[2]) and (tmp >= abs(a[1]-a[2])):
-        valid = 1
-    
+    if (tmp <= a[1]+a[2]) and (tmp >= abs(a[1]-a[2])) and (pz+d[0] >= 0): 
     # calculate
-    if valid:
         c3 = (px**2+py**2+pz**2-a[1]**2-a[2]**2)/(2*a[1]*a[2])
         s3 = (1-c3**2)**0.5
         theta3 = atan2(s3, c3)
@@ -257,8 +257,15 @@ def inverseKine():
         theta2 = atan2(pz, (px**2+py**2)**0.5) - acos((px**2+py**2+pz**2+a[1]**2-a[2]**2)/(2*a[1]*(px**2+py**2+pz**2)**0.5))
 
         theta1 = atan2(py, px)
+        
+        valid = 1
+        for i, thetaN in enumerate([theta1, theta2, theta3]):
+            if thetaN < limitTheta[i][0] or thetaN > limitTheta[i][1]:
+                valid = 0
+            else: guiThetaInv[i].set(round(thetaN*180/pi, 3))
 
-        print(theta1*180/pi, theta2*180/pi, theta3*180/pi)
+    if valid:
+        # print(theta1*180/pi, theta2*180/pi, theta3*180/pi)
         deltaTime = 60
         nextTheta = np.array([theta1, theta2, theta3])
         stepAngle = np.array([(nextTheta[0]-theta[0])/deltaTime, (nextTheta[1]-theta[1])/deltaTime, (nextTheta[2]-theta[2])/deltaTime])
@@ -291,9 +298,9 @@ frameForw.grid(row=1, column=0)
 Label(frameForw, text="Forward Kinematic", font='Helvetica 10', fg="red").grid(row=0, columnspan = 3, column=0)
 for i in range(len(theta)):
     Label(frameForw, text="Theta "+str(i+1), font='Helvetica 10').grid(row=i+1, column=0)
-    scale2 = Scale(frameForw, variable=guiTheta[i], showvalue=0, resolution=1,  from_ = -90, to = 90,  orient = HORIZONTAL, length=200) 
+    scale2 = Scale(frameForw, variable=guiTheta[i], showvalue=0, resolution=1,  from_ = -180, to = 180,  orient = HORIZONTAL, length=200) 
     scale2.grid(row=i+1, column=1)
-    entry2 = Entry(frameForw, textvariable=guiTheta[i], width=5)
+    entry2 = Entry(frameForw, textvariable=guiTheta[i], width=10)
     entry2.grid(row=i+1, column=2)
 buttonForw = Button(frameForw, text="Execute", command=forwardKine, height=2, width=5).grid(row=4, column=2)
 
@@ -302,10 +309,10 @@ frameInvrs.grid(row=2, column=0)
 Label(frameInvrs, text="Inverse Kinematic", font='Helvetica 10', fg="red").grid(row=0, columnspan = 3, column=0)
 for i, t in enumerate(["x ", "y ", "z "]):
     Label(frameInvrs, text=t, font='Helvetica 10').grid(row=i+1, column=0)
-    # scale2 = Scale(frameForw, variable=guiTheta[i], showvalue=0, resolution=1,  from_ = -90, to = 90,  orient = HORIZONTAL, length=200) 
-    # scale2.grid(row=i+1, column=1)
-    entry3 = Entry(frameInvrs, textvariable=guiCoorInv[i], width=15)
+    entry3 = Entry(frameInvrs, textvariable=guiCoorInv[i], width=10)
     entry3.grid(row=i+1, column=1)
+    Label(frameInvrs, text="Theta "+str(i+1) + ":", font='Helvetica 10').grid(row=i+1, column=2)
+    Label(frameInvrs, textvariable=guiThetaInv[i], font='Helvetica 10').grid(row=i+1, column=3)
 buttonInvrs = Button(frameInvrs, text="Execute", command=inverseKine, height=2, width=5).grid(row=4, column=2)
 
 while True:
