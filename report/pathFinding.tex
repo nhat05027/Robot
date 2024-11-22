@@ -1,0 +1,258 @@
+\section{Path Finding}
+\subsection{Sơ lược về bài toán}
+Bài toán Path Finding là một trong những bài toán cơ bản trong lĩnh vực Trí tuệ Nhân tạo, với mục tiêu tìm đường đi ngắn nhất từ một điểm khởi đầu (\textit{start}) đến một điểm kết thúc (\textit{goal}) trên một bản đồ hoặc đồ thị. 
+
+Giải thuật A* (\textit{A-star}) được lựa chọn để giải quyết bài toán này nhờ vào tính hiệu quả cao trong việc kết hợp giữa hai phương pháp: tìm kiếm tham lam (\textit{Greedy Search}) và tìm kiếm chi phí đều (\textit{Uniform Cost Search}). Giải thuật này sử dụng công thức:
+\[
+f(n) = g(n) + h(n)
+\]
+Trong đó:
+\begin{itemize}
+    \item $f(n)$: Hàm lượng giá tổng hợp.
+    \item $g(n)$: Chi phí từ điểm bắt đầu đến trạng thái $n$.
+    \item $h(n)$: Heuristic (ước lượng chi phí từ trạng thái $n$ đến đích).
+\end{itemize}
+
+Trong bài toán này, nhóm lựa chọn sẽ áp dụng giải thuật A* để tìm đường đi ngắn nhất từ điểm bắt đầu đến điểm đích trên một bản đồ lưới 2D.
+
+
+\subsection{Những đánh giá về game}
+Path Finding là một bài toán không chỉ mang tính thực tiễn cao mà còn chứa đựng nhiều khía cạnh học thuật quan trọng trong lĩnh vực Trí tuệ Nhân tạo. Đây là nền tảng của nhiều ứng dụng thực tế như:
+\begin{itemize}
+    \item Định tuyến trong giao thông vận tải, các ứng dụng bản đồ.
+    \item Điều hướng cho các nhân vật trong các trò chơi điện tử.
+    \item Điều hướng robot trong lĩnh vực Robotics.
+\end{itemize}
+Tuy nhiên, việc giải quyết bài toán này có thể bị ảnh hưởng bởi độ lớn của không gian trạng thái, độ phức tạp của các phép di chuyển, và chất lượng của hàm lượng giá. Một heuristic không phù hợp có thể dẫn đến kết quả kém tối ưu, hoặc khiến thuật toán phải duyệt qua quá nhiều trạng thái.
+
+Giải thuật A* với cơ chế tối ưu hoá chi phí bằng cách kết hợp hàm $g(n)$ (chi phí đã đi) và hàm $h(n)$ (ước lượng chi phí còn lại) là một giải pháp mạnh mẽ. Việc đánh giá và cải thiện heuristic phù hợp là yếu tố then chốt trong việc nâng cao hiệu quả của thuật toán.
+
+\subsection{Giao diện trực quan hóa}
+Để trực quan hóa kết quả của thuật toán A*, nhóm em đã xây dựng một giao diện minh họa bằng Python, sử dụng thư viện \texttt{matplotlib} để vẽ bản đồ và đường đi. Dưới đây là chi tiết về cách thức hoạt động của giao diện:
+
+\begin{itemize}
+    \item Mỗi ô trên bản đồ được hiển thị bằng một màu sắc khác nhau, tương ứng với các trạng thái:
+    \begin{itemize}
+        \item \textbf{0: Passage (đường đi trống)} - màu đen.
+        \item \textbf{1: Wall (vật cản)} - màu tím đậm.
+        \item \textbf{2: Start (điểm bắt đầu)} - màu đỏ.
+        \item \textbf{3: Destination (điểm đích)} - màu cam.
+        \item \textbf{4: Path (đường đi tìm được)} - màu vàng nhạt.
+    \end{itemize}
+    \item Giao diện có thể tạo tùy chỉnh một bản đồ kích thước \( width \times height \), với tỷ lệ vật cản \textit{wallrate}. Với điểm bắt đầu và điểm đích nếu không được tùy chỉnh thì sẽ được sinh ngẫu nhiên.
+    \item Các đường đi được vẽ bằng cách tô màu các ô thuộc đường đi ngắn nhất từ điểm bắt đầu đến điểm đích.
+\end{itemize}
+
+
+
+\newpage
+Dưới đây là một vài kết quả trực quan hóa:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Images/pathfinding/output.png}
+    \caption{Kết quả trực quan cho bản đồ có kích thước 20x20, tỉ lệ vật cản là 0.3.}
+    \label{fig:visualization1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Images/pathfinding/output2.png}
+    \caption{Kết quả trực quan cho bản đồ có kích thước 10x10, tỉ lệ vật cản là 0.3.}
+    \label{fig:visualization2}
+\end{figure}
+\newpage
+\subsection{Xây dựng các cấu trúc để mô phỏng bài toán}
+Ở trò chơi này, nhóm em tổ chức các đoạn mã Python trên các tệp tin gồm Map.py, Astar.py, visualize.ipynb và có một file map1.txt dành cho trường hợp muốn tùy chỉnh sâu cấu trúc bản đồ lưới 2D:
+Để giải quyết bài toán tìm đường (Path Finding) bằng giải thuật A*, nhóm em đã triển khai hai file Python chính là \texttt{astar.py} và \texttt{map.py}. 
+
+\subsubsection{Cấu trúc file \texttt{astar.py}}
+\begin{lstlisting}[language=python, caption=Định nghĩa các lớp trong file astar.py]
+class Cell:
+    def __init__(self):
+class AStart:
+    def __init__(self, map, movedir=4):
+    def Search(self):
+    def PrintPath(self):
+    def UpdateGrid(self):
+\end{lstlisting}
+
+\textbf{Giải thích:}
+\begin{itemize}
+    \item \texttt{class Cell}: Đại diện cho từng ô trong bản đồ.
+    \begin{itemize}
+        \item Thuộc tính:
+        \begin{itemize}
+            \item \texttt{parent\_x, parent\_y}: Tọa độ của ô cha.
+            \item \texttt{f, g, h}: Các giá trị tổng chi phí, chi phí đến ô, và ước lượng đến đích.
+        \end{itemize}
+    \end{itemize}
+    \item \texttt{class AStart}: Thực hiện thuật toán A*.
+    \begin{itemize}
+        \item Phương thức:
+        \begin{itemize}
+            \item \texttt{Search}: Triển khai thuật toán A* để tìm đường đi.
+            \item \texttt{PrintPath}: In đường đi từ điểm đầu đến điểm đích.
+            \item \texttt{UpdateGrid}: Cập nhật bản đồ với đường đi tìm được.
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Cấu trúc file \texttt{map.py}}
+\begin{lstlisting}[language=python, caption=Định nghĩa các lớp trong file map.py]
+class Map:
+    def CreateWall(self, wall_rate=0.3):
+    def IsValid(self, x, y):
+    def IsBlock(self, x, y):
+    def CalculateH(self, x, y, algorithm):
+\end{lstlisting}
+
+\textbf{Giải thích:}
+\begin{itemize}
+    \item \texttt{class Map}: Đại diện cho bản đồ trong bài toán.
+    \begin{itemize}
+        \item \textbf{Thuộc tính}:
+        \begin{itemize}
+            \item \texttt{width, height}: Kích thước bản đồ.
+            \item \texttt{grid}: Ma trận biểu diễn bản đồ.
+            \item \texttt{src\_point, des\_point}: Tọa độ điểm bắt đầu và điểm kết thúc.
+        \end{itemize}
+        \item \textbf{Phương thức}:
+        \begin{itemize}
+            \item \texttt{CreateWall}: Tạo các vật cản ngẫu nhiên trên bản đồ.
+            \item \texttt{IsValid}: Kiểm tra xem tọa độ có hợp lệ không.
+            \item \texttt{IsBlock}: Kiểm tra xem tọa độ có bị chặn bởi vật cản (tường) không.
+            \item \texttt{IsDestination}: Kiểm tra xem tọa độ có phải điểm đích không.
+            \item \texttt{CalculateH}: Tính toán heuristic theo thuật toán Manhattan hoặc Euclidean.
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+\subsection{Định nghĩa không gian trạng thái}
+
+Trong bài toán Path Finding, không gian trạng thái được định nghĩa như sau:
+
+\begin{itemize}
+    \item \textbf{Trạng thái:} 
+    Mỗi trạng thái trong không gian trạng thái là một tọa độ $(x, y)$ trên bản đồ lưới 2D kích thước $n \times m$, trong đó:
+    \begin{itemize}
+        \item $x$: Chỉ số hàng (row index).
+        \item $y$: Chỉ số cột (column index).
+    \end{itemize}
+    
+    \item \textbf{Trạng thái khởi đầu (Start State):} 
+    Là tọa độ ban đầu $S = (x_s, y_s)$, nơi bắt đầu tìm kiếm đường đi.
+
+    \item \textbf{Trạng thái kết thúc (Goal State):} 
+    Là tọa độ đích $G = (x_g, y_g)$, nơi cần tìm đến.
+
+    \item \textbf{Trạng thái cản trở (Obstacle):} 
+    Các ô không thể đi qua được trên bản đồ, ký hiệu là $W$ (Wall).
+
+    \item \textbf{Trạng thái trung gian (Intermediate State):}
+    Các ô có thể đi qua trong quá trình tìm kiếm, ký hiệu là $P$ (Passage).
+\end{itemize}
+
+\textbf{Không gian trạng thái:} 
+Không gian trạng thái là tập hợp tất cả các tọa độ $(x, y)$ khả thi trên bản đồ, được định nghĩa là:
+\[
+\mathcal{S} = \{(x, y) \ | \ 0 \leq x < n, 0 \leq y < m, (x, y) \notin W \}
+\]
+
+\textbf{Hàm chuyển trạng thái (State Transition Function):} 
+Các trạng thái chuyển đổi được định nghĩa bởi các quy tắc di chuyển:
+\begin{itemize}
+    \item Di chuyển sang trái: $(x, y) \rightarrow (x, y-1)$
+    \item Di chuyển sang phải: $(x, y) \rightarrow (x, y+1)$
+    \item Di chuyển lên: $(x, y) \rightarrow (x-1, y)$
+    \item Di chuyển xuống: $(x, y) \rightarrow (x+1, y)$
+\end{itemize}
+
+Các phép di chuyển này chỉ khả thi nếu tọa độ mới $(x', y')$ thỏa mãn:
+\[
+(x', y') \in \mathcal{S}.
+\]
+
+\textbf{Hàm lượng giá (Heuristic Function):} 
+Để tối ưu hóa quá trình tìm kiếm, nhóm em sử dụng hàm lượng giá $h(n)$ để ước lượng chi phí từ trạng thái hiện tại đến trạng thái đích:
+
+\textbf{Manhattan Distance:} 
+\[
+h(x, y) = |x - x_g| + |y - y_g|
+\] 
+Ngoài ra để mở rộng bài toán cho trường hợp Agent di chuyển được cả hướng chéo thì sẽ dùng hàm lượng giá:
+
+\textbf{Euclidean Distance:} 
+\[
+h(x, y) = \sqrt{(x - x_g)^2 + (y - y_g)^2}
+\]
+
+
+Với định nghĩa trên, không gian trạng thái và các phép chuyển đổi đã được thiết lập để áp dụng giải thuật A*.
+ 
+
+
+\subsection{A*  Search}
+\begin{itemize}
+    \item \textbf{Pseudocode:}\\
+    Thuật toán A* được triển khai như sau:
+
+function AStarSearch(start, goal, map):\\
+    1. Khởi tạo danh sách mở (Open List) chứa ô bắt đầu, với f = 0.\\
+    2. Khởi tạo danh sách đóng (Closed List) rỗng.\\
+    While Open List không rỗng:\\
+        3. Lấy ô trong danh sách mở có f nhỏ nhất làm ô hiện tại.\\
+        4. Nếu ô hiện tại là đích, dừng thuật toán và trả về đường đi.\\
+        5. Duyệt qua các ô lân cận của ô hiện tại:\\
+            a. Nếu ô không hợp lệ hoặc là vật cản, bỏ qua.\\
+            b. Nếu ô đã được xét trong danh sách đóng, bỏ qua.\\
+            c. Tính giá trị g, h, và f cho ô lân cận:\\
+                - g = chi phí từ điểm bắt đầu đến ô lân cận.\\
+                - h = ước lượng chi phí từ ô lân cận đến đích(heuristic).\\
+                - f = g + h.\\
+            d. Nếu ô lân cận chưa có trong danh sách mở hoặc có f nhỏ hơn, cập nhật danh sách mở.\\
+        6. Thêm ô hiện tại vào danh sách đóng.\\
+    7. Nếu danh sách mở rỗng nhưng chưa tìm được đích, trả về thất bại.\\
+
+
+
+
+    \item \textbf{Áp dụng vào bài toán và kết quả:}\\
+    Thuật toán A* được áp dụng để giải bài toán tìm đường trên bản đồ lưới \(20 \times 20\) với tỷ lệ vật cản là \(30\%\). 
+
+    \begin{itemize}
+        \item \textbf{Các bước chính:}
+        \begin{enumerate}
+            \item \textbf{Khởi tạo danh sách mở và danh sách đóng:} 
+                  - Danh sách mở (\textit{Open List}) chứa các ô cần được xét.
+                  - Danh sách đóng (\textit{Closed List}) chứa các ô đã xét.
+            \item \textbf{Tính toán các giá trị \(f, g, h\):}
+            
+                  - \(g(n)\): Chi phí từ điểm bắt đầu đến ô hiện tại.\\
+                  - \(h(n)\): Heuristic dựa trên khoảng cách Manhattan hoặc Euclidean.\\
+                  - \(f(n) = g(n) + h(n)\).
+            \item \textbf{Tìm ô có giá trị \(f\) nhỏ nhất:} 
+                  Duyệt các ô xung quanh (theo 4 hoặc 8 hướng) và cập nhật danh sách mở.
+            \item \textbf{Lưu lại đường đi tối ưu:} Truy xuất từ điểm đích ngược về điểm bắt đầu bằng cách sử dụng \texttt{parent\_x} và \texttt{parent\_y}.
+        \end{enumerate}
+
+        \item \textbf{Minh họa kết quả:}
+        Sau khi áp dụng thuật toán, đường đi tối ưu được đánh dấu trên bản đồ với màu vàng.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.7\textwidth]{Images/pathfinding/output.png}
+            \caption{Kết quả đường đi tìm được bằng thuật toán A*.}
+            \label{fig:astar_result}
+        \end{figure}
+
+        \item \textbf{Đánh giá:}
+        \begin{itemize}
+            \item Thuật toán tìm được đường đi ngắn nhất với chi phí tối ưu.
+            \item Áp dụng heuristic Manhattan giúp giảm số ô cần xét trong danh sách mở.
+            \item Với bản đồ có kích thước lớn, bộ nhớ sử dụng cho danh sách mở và đóng có thể tăng đáng kể.
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\newpage
+
+

@@ -1,0 +1,207 @@
+
+
+\documentclass[a4paper]{article}
+\usepackage{vntex}
+%\usepackage[english,vietnam]{babel}
+\usepackage[utf8]{inputenc}
+%\usepackage[utf8]{inputenc}
+%\usepackage[francais]{babel}
+\usepackage{a4wide,amssymb,epsfig,latexsym,array,hhline,fancyhdr}
+\usepackage[normalem]{ulem}
+%\usepackage{soul}
+\usepackage[makeroom]{cancel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol,longtable,amscd}
+\usepackage{diagbox}%Make diagonal lines in tables
+\usepackage{booktabs}
+\usepackage{alltt}
+\usepackage{caption,subcaption}
+\usepackage{lastpage}
+\usepackage[lined,boxed,commentsnumbered]{algorithm2e}
+\usepackage{enumerate}
+\usepackage{graphicx}							% Standard graphics package
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{rotating}
+\usepackage{graphics}
+\usepackage{geometry}
+% \usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{epsfig}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{float}
+\definecolor{barbiepink}{rgb}{0.85,0.09,0.52}
+\definecolor{blackcoffee}{rgb}{0.23,0.18,0.18}
+\definecolor{cgreen}{rgb}{0,0.6,0}
+\definecolor{cgray}{rgb}{0.5,0.5,0.5}
+\definecolor{cpurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}	
+\usetikzlibrary{arrows,snakes,backgrounds}
+\usepackage[unicode]{hyperref}
+\lstset{
+  breaklines=true,
+  xleftmargin=25pt,
+  xrightmargin=25pt,
+  aboveskip=10pt,
+  belowskip=10pt,
+  basicstyle=\ttfamily,
+  backgroundcolor=\color{lightgray},
+  showstringspaces=false,
+  frame=ltrb,
+  language=python,
+  tabsize=2,
+  numbers=left,
+  numberstyle=\small,
+  numbersep=8pt,
+  morekeywords={*, factorial, sum, erlang},
+  keywordstyle=\color{purple}\textbf,
+  commentstyle=\color{blue}\textit,
+  stringstyle=\color{red}
+}
+
+\def\thesislayout{	% A4: 210 × 297
+	\geometry{
+		a4paper,
+		total={160mm,240mm},  % fix over page
+		left=30mm,
+		top=30mm,
+	}
+}
+
+
+%\usepackage{fancyhdr}
+\setlength{\headheight}{40pt}
+\setlength{\parindent}{4pt}
+\pagestyle{fancy}
+\fancyhead{} % clear all header fields
+\fancyhead[L]{
+ \begin{tabular}{rl}
+    \begin{picture}(25,15)(0,0)
+    \put(0,-8){\includegraphics[width=8mm, height=8mm]{Images/hcmut.png}}
+    %\put(0,-8){\epsfig{width=10mm,figure=hcmut.eps}}
+   \end{picture}&
+	%\includegraphics[width=8mm, height=8mm]{hcmut.png} & %
+	\begin{tabular}{l}
+		\textbf{\bf \ttfamily Trường Đại Học Bách Khoa Tp.Hồ Chí Minh}\\
+		\textbf{\bf \ttfamily Khoa Điện-Điện tử}
+	\end{tabular} 	
+ \end{tabular}
+}
+\fancyhead[R]{
+	\begin{tabular}{l}
+		 \bf \\
+		\bf 
+	\end{tabular}  }
+\fancyfoot{} % clear all footer fields
+\fancyfoot[L]{\scriptsize \ttfamily Bài tập lớn môn Kỹ thuật Robot (EE3065) - HK241}
+\fancyfoot[R]{\scriptsize \ttfamily Trang {\thepage}/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+
+%%%
+
+
+
+\sloppy
+\captionsetup[figure]{labelfont={small,bf},textfont={small,it},belowskip=-1pt,aboveskip=-9pt}
+\captionsetup[table]{labelfont={small,bf},textfont={small,it},belowskip=-1pt,aboveskip=7pt}
+\setlength{\floatsep}{5pt plus 2pt minus 2pt}
+\setlength{\textfloatsep}{5pt plus 2pt minus 2pt}
+\setlength{\intextsep}{10pt plus 2pt minus 2pt}
+
+\thesislayout
+\renewcommand{\baselinestretch}{1.5}
+\begin{document}
+\large
+\begin{titlepage}
+\begin{center}
+\textbf{\large ĐẠI HỌC QUỐC GIA THÀNH PHỐ HỒ CHÍ MINH} \\
+\textbf{\large TRƯỜNG ĐẠI HỌC BÁCH KHOA} \\
+\textbf{\large KHOA ĐIỆN-ĐIỆN TỬ} \\
+\textbf{\large BỘ MÔN TỰ ĐỘNG} 
+\end{center}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=7cm]{Images/hcmut.png}
+\end{center}
+\end{figure}
+
+\vspace{1cm}
+\begin{center}
+\begin{tabular}{c}
+{\textbf{{\Large KỸ THUẬT ROBOT - EE3065}}}\\
+~~\\
+\hline
+\\
+\textbf{\large BÁO CÁO BÀI TẬP LỚN} \\
+\textbf{\LARGE ARTICULATED ARM ROBOT} \\
+\\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{rrlr}
+\hspace{5 cm} & \large GVHD: & \large NGUYỄN HOÀNG GIÁP\\
+
+& \large SV thực hiện: & \large HOÀNG SỸ NHẤT \\
+& \large MSSV: & \large 2111915 \\
+
+\end{tabular}
+\end{table}
+\vspace{2cm}
+\begin{center}
+{\bf Thành phố Hồ Chí Minh, Tháng 12/2024}
+\end{center}
+\end{titlepage}
+
+
+%\thispagestyle{empty}
+
+\newpage
+\tableofcontents
+\newpage
+\input{gioi_thieu}
+\newpage
+\input{forward_kine}
+\newpage
+\input{inverse_kine}
+\newpage
+\input{trajectory_plan}
+\newpage
+\input{jacobi}
+\newpage
+\input{pathFinding}
+\newpage
+\section{ĐÁNH GIÁ CHUNG VÀ KẾT LUẬN}
+Sau thời gian thực hiện bài tập lớn số 1 môn Nhập môn Trí tuệ nhân tạo, nhóm có những đánh giá và kết luận chung sau khi hoàn thành bài tập lớn này như sau :
+\begin{itemize}
+    \item Về những kết quả thu được:
+    \begin{itemize}
+        \item Biết cách mô phỏng bài toán cũng như kết quả dưới dạng các ứng dụng đơn giản trên nền tảng ngôn ngữ Python 3 bằng cách áp dụng linh hoạt các module cũng như sử dụng các framework hiệu quả.
+        \item Hiểu được cấu trúc và những thành phần cơ bản của các bài toán để từ đó xây dựng được các cấu trúc để mô phỏng bài toán. 
+        \item Đã hiểu rõ cũng như biết cách áp dụng 4 giải thuật tìm kiếm cơ bản đó là Depth-First Search, Genetic, A* Search  vào để tìm lời giải cho bài toán.
+        \item Cải thiện được khả năng lập trình bằng ngôn ngữ Python 3, tận dụng các module sẵn có vô cùng hữu ích của ngôn ngữ này. 
+        \item Nâng cao khả năng làm việc theo nhóm cũng như khả năng hoàn thành công việc độc lập và đúng thời gian của từng thành viên trong nhóm. 
+    \end{itemize}
+    \item Về những hạn chế còn tồn đọng:
+    \begin{itemize}
+        \item Cải thiện được khả năng lập trình bằng ngôn ngữ Python 3, tận dụng các module sẵn có vô cùng hữu ích của ngôn ngữ này.
+    \end{itemize}
+\end{itemize}
+Qua những đánh giá và kết luận chung như trên, các thành viên của nhóm đều nhận thấy rằng bản thân đã học thêm được khá nhiều điều mới lạ và đã rèn dũa thêm được những kỹ năng sẵn có. Tuy vậy thì nhóm cũng nhận ra được vẫn còn khá nhiều khuyết điểm quan trọng cần được khắc phục ngay để có thể thực hiện những dự án khác trong tương lai một cách đầy đủ và hoàn thiện hơn. 
+\section{VIDEO DEMO VÀ CODE PYTHON}
+Link video thuyết trình: \href{}{Nền tảng Youtube}\\
+Link slide thuyết trình: \href{}{Nền tảng Canva}
+\addcontentsline{toc}{section}{Tài liệu}
+\begin{thebibliography}{99999}
+
+\end{thebibliography}
+\end{document}

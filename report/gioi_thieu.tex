@@ -1,0 +1,89 @@
+\section{GIỚI THIỆU}
+\subsection{Sơ lược về Articulated Arm Robot}
+Theo Robotic Institute of America (\textit{RIA}): Robot là một hệ thống đa tác vụ có thể lập trình được thiết kế để di chuyển vật liệu, bộ phận, dụng cụ hoặc thiết bị chuyên dụng thông qua chuyển động được lập trình theo các biến số để thực hiện các nhiệm vụ cụ thể đó, ngoài ra còn có thể thu thập thông tin từ môi trường và di chuyển thông minh theo đáp ứng.
+
+Nhìn chung, “\textit{Robotic}” là thuật ngữ khoa học để định nghĩa lĩnh vực nghiên cứu khoa học về sự kết nối thông minh giữa việc ra quyết định và hành động. Do đó, có thể nhận định Robot là một chủ đề liên ngành liên quan đến các lĩnh vực cơ khí, điều khiển, máy tính và điện tử.
+
+Articulated Arm là một loại cánh tay robot được thiết kế để mô phỏng chuyển động của cánh tay con người. Dưới đây là một số điểm nổi bật của Articulated Arm:
+\begin{itemize}
+    \item \textbf{Cấu trúc:}
+    \begin{itemize}
+        \item Gồm nhiều khâu (\textit{link}) được kết nối bằng các khớp (\textit{joint}).
+        \item Các khớp có thể là khớp quay (\textit{cho phép xoay}) hoặc khớp dịch chuyển (\textit{cho phép di chuyển tuyến tính}).
+    \end{itemize}
+    \item \textbf{Bậc tự do:}
+    \begin{itemize}
+        \item Thường có nhiều bậc tự do, cho phép thực hiện các chuyển động và định vị phức tạp.
+    \end{itemize}
+    \item \textbf{End Effectors (\textit{Công cụ cuối}):}
+    \begin{itemize}
+        \item Có thể được trang bị nhiều công cụ hoặc kẹp ở cuối để thực hiện các nhiệm vụ cụ thể, như hàn, sơn, hoặc nhặt và đặt đồ vật.
+    \end{itemize}
+    \item \textbf{Hệ thống điều khiển:}
+    \begin{itemize}
+        \item Thường được điều khiển bởi các thuật toán và phần mềm tinh vi, cho phép thực hiện các chuyển động chính xác và tự động hóa.
+    \end{itemize}
+\end{itemize}
+
+Articulated Arm được ứng dụng phổ biến trong các lĩnh vực:
+\begin{itemize}
+    \item \textbf{Sản xuất:} Được sử dụng rộng rãi trong dây chuyền lắp ráp cho các nhiệm vụ như hàn, sơn và đóng gói.
+    \item \textbf{Chăm sóc sức khỏe:} Sử dụng trong các robot phẫu thuật để hỗ trợ bác sĩ trong các nhiệm vụ chính xác.
+    \item \textbf{Nghiên cứu và phát triển:} Được sử dụng trong các phòng thí nghiệm cho các thí nghiệm yêu cầu thao tác chính xác với các đối tượng.
+    \item \textbf{Giải trí:} Được sử dụng trong animatronics và hiệu ứng đặc biệt trong phim.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Images/6-axis-duo.png}
+    \caption{Các mẫu cánh tay robot trong công nghiệp}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsection{Giới thiệu về ngôn ngữ lập trình Python}
+Python là một ngôn ngữ lập trình bậc cao, được phát triển bởi Guido van Rossum và lần đầu tiên được phát hành vào năm 1991. Nó nổi bật với cú pháp rõ ràng, dễ đọc và dễ học, giúp lập trình viên có thể phát triển ứng dụng một cách nhanh chóng và hiệu quả.
+
+Các đặc điểm nổi bật của Python:
+\begin{itemize}
+    \item \textbf{Cú pháp đơn giản:}
+    \begin{itemize}
+        \item Python có cú pháp gần gũi với ngôn ngữ tự nhiên, giúp người mới bắt đầu dễ dàng tiếp cận.
+    \end{itemize}
+    \item \textbf{Đa năng:}
+    \begin{itemize}
+        \item Python có thể được sử dụng cho nhiều mục đích khác nhau, bao gồm phát triển web, phân tích dữ liệu, học máy, trí tuệ nhân tạo, tự động hóa, và nhiều lĩnh vực khác.
+    \end{itemize}
+    \item \textbf{Thư viện phong phú:}
+    \begin{itemize}
+        \item Python có một hệ sinh thái thư viện phong phú, bao gồm các thư viện nổi tiếng như NumPy, Pandas, Matplotlib, TensorFlow và Django, giúp lập trình viên dễ dàng thực hiện các tác vụ phức tạp.
+    \end{itemize}
+    \item \textbf{Hỗ trợ lập trình hướng đối tượng:}
+    \begin{itemize}
+        \item Python hỗ trợ lập trình hướng đối tượng, cho phép người lập trình tổ chức mã nguồn một cách hiệu quả hơn.
+    \end{itemize}
+    \item \textbf{Cộng đồng lớn:}
+    \begin{itemize}
+        \item Python có một cộng đồng lập trình viên lớn và năng động, cung cấp nhiều tài nguyên, hướng dẫn và hỗ trợ.
+    \end{itemize}
+\end{itemize}
+
+Trong bài tập lớn này sẽ sử dụng Python và các thư viện hỗ trợ sau sau để tạo giao diện và giả lập cánh tay robot:
+\begin{itemize}
+    \item \textbf{Pygame:}
+    \begin{itemize}
+        \item Thư viên dùng để vẽ 2-D và tạo animation cũng như tương tác với bàn phím để xoay góc nhìn trong môi trường giả lập cánh tay robot.
+    \end{itemize}
+    \item \textbf{Numpy:}
+    \begin{itemize}
+        \item Thư viện Numpy được sử dụng để tính toán các ma trận và một vài phép toán học cơ bản.
+    \end{itemize}
+    \item \textbf{Matplotlib:}
+    \begin{itemize}
+        \item Dùng để vẽ đồ thị.
+    \end{itemize}
+    \item \textbf{Tkinter:}
+    \begin{itemize}
+        \item Thư viện hỗ trợ tạo giao diện người dùng UI \textit{(User Interface}).
+    \end{itemize}
+\end{itemize}
+
