@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.22)  22 NOV 2024 20:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.22)  22 NOV 2024 21:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1306,7 +1306,7 @@ Package hyperref Info: Link coloring OFF on input line 120.
 \@outlinefile=\write4
 \openout4 = `main.out'.
 
-<Images/hcmut.png, id=121, 514.3215pt x 491.9178pt>
+<Images/hcmut.png, id=97, 514.3215pt x 491.9178pt>
 File: Images/hcmut.png Graphic file (type png)
 <use Images/hcmut.png>
 Package pdftex.def Info: Images/hcmut.png  used on input line 131.
@@ -1333,26 +1333,7 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 [1
 
 {/home/nhat/.miktex/texmfs/data/fonts/map/pdftex/pdftex.map} <./Images/hcmut.pn
-g>] (main.toc
-LaTeX Font Info:    Trying to load font information for T5+cmtt on input line 2
-3.
- (/home/nhat/.miktex/texmfs/install/tex/latex/vntex/t5cmtt.fd
-File: t5cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-
-File: Images/hcmut.png Graphic file (type png)
-<use Images/hcmut.png>
-Package pdftex.def Info: Images/hcmut.png  used on input line 29.
-(pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-LaTeX Font Info:    Font shape `T5/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `T5/cmtt/m/n' tried instead on input line 29.
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
-been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.29 ...line {section}{Tài liệu}{27}{section.8}
-                                                  % [1])
+g>] (main.toc)
 \tf@toc=\write5
 \openout5 = `main.toc'.
 
@@ -1362,14 +1343,27 @@ File: Images/hcmut.png Graphic file (type png)
 <use Images/hcmut.png>
 Package pdftex.def Info: Images/hcmut.png  used on input line 171.
 (pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[2] (gioi_thieu.tex
+LaTeX Font Info:    Trying to load font information for T5+cmtt on input line 1
+71.
+(/home/nhat/.miktex/texmfs/install/tex/latex/vntex/t5cmtt.fd
+File: t5cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `T5/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `T5/cmtt/m/n' tried instead on input line 171.
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.171 \newpage
+               [1] (gioi_thieu.tex
 
 File: Images/hcmut.png Graphic file (type png)
 <use Images/hcmut.png>
 Package pdftex.def Info: Images/hcmut.png  used on input line 32.
 (pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[3]
-<Images/6-axis-duo.png, id=184, 602.25pt x 602.25pt>
+[2]
+<Images/6-axis-duo.png, id=148, 602.25pt x 602.25pt>
 File: Images/6-axis-duo.png Graphic file (type png)
 <use Images/6-axis-duo.png>
 Package pdftex.def Info: Images/6-axis-duo.png  used on input line 38.
@@ -1380,14 +1374,14 @@ File: Images/hcmut.png Graphic file (type png)
 <use Images/hcmut.png>
 Package pdftex.def Info: Images/hcmut.png  used on input line 51.
 (pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[4 <./Images/6-axis-duo.png>]
+[3 <./Images/6-axis-duo.png>]
 
 File: Images/hcmut.png Graphic file (type png)
 <use Images/hcmut.png>
 Package pdftex.def Info: Images/hcmut.png  used on input line 87.
 (pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[5]
-<Images/software.png, id=199, 1192.455pt x 550.055pt>
+[4]
+<Images/software.png, id=163, 1192.455pt x 550.055pt>
 File: Images/software.png Graphic file (type png)
 <use Images/software.png>
 Package pdftex.def Info: Images/software.png  used on input line 91.
@@ -1398,8 +1392,8 @@ File: Images/hcmut.png Graphic file (type png)
 <use Images/hcmut.png>
 Package pdftex.def Info: Images/hcmut.png  used on input line 173.
 (pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[6 <./Images/software.png>] (forward_kine.tex
-<Images/arti_arm.png, id=207, 595.22375pt x 459.7175pt>
+[5 <./Images/software.png>] (forward_kine.tex
+<Images/arti_arm.png, id=170, 595.22375pt x 459.7175pt>
 File: Images/arti_arm.png Graphic file (type png)
 <use Images/arti_arm.png>
 Package pdftex.def Info: Images/arti_arm.png  used on input line 14.
@@ -1410,20 +1404,20 @@ File: Images/hcmut.png Graphic file (type png)
 <use Images/hcmut.png>
 Package pdftex.def Info: Images/hcmut.png  used on input line 37.
 (pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[7 <./Images/arti_arm.png>]
+[6 <./Images/arti_arm.png>]
 
 File: Images/hcmut.png Graphic file (type png)
 <use Images/hcmut.png>
 Package pdftex.def Info: Images/hcmut.png  used on input line 79.
 (pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[8]
+[7]
 
 File: Images/hcmut.png Graphic file (type png)
 <use Images/hcmut.png>
 Package pdftex.def Info: Images/hcmut.png  used on input line 127.
 (pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[9]
-<Images/draw_bot.png, id=304, 808.01875pt x 531.9875pt>
+[8]
+<Images/draw_bot.png, id=268, 808.01875pt x 531.9875pt>
 File: Images/draw_bot.png Graphic file (type png)
 <use Images/draw_bot.png>
 Package pdftex.def Info: Images/draw_bot.png  used on input line 159.
@@ -1434,8 +1428,8 @@ File: Images/hcmut.png Graphic file (type png)
 <use Images/hcmut.png>
 Package pdftex.def Info: Images/hcmut.png  used on input line 163.
 (pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[10]
-<Images/view_ui.png, id=332, 382.42876pt x 207.77625pt>
+[9]
+<Images/view_ui.png, id=296, 382.42876pt x 207.77625pt>
 File: Images/view_ui.png Graphic file (type png)
 <use Images/view_ui.png>
 Package pdftex.def Info: Images/view_ui.png  used on input line 187.
@@ -1446,8 +1440,8 @@ File: Images/hcmut.png Graphic file (type png)
 <use Images/hcmut.png>
 Package pdftex.def Info: Images/hcmut.png  used on input line 191.
 (pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[11 <./Images/draw_bot.png>]
-<Images/forw_ui.png, id=352, 369.38pt x 173.64874pt>
+[10 <./Images/draw_bot.png>]
+<Images/forw_ui.png, id=316, 369.38pt x 173.64874pt>
 File: Images/forw_ui.png Graphic file (type png)
 <use Images/forw_ui.png>
 Package pdftex.def Info: Images/forw_ui.png  used on input line 196.
@@ -1458,8 +1452,8 @@ File: Images/hcmut.png Graphic file (type png)
 <use Images/hcmut.png>
 Package pdftex.def Info: Images/hcmut.png  used on input line 206.
 (pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[12 <./Images/view_ui.png> <./Images/forw_ui.png>]
-<Images/demo_forw.png, id=361, 1191.45125pt x 533.995pt>
+[11 <./Images/view_ui.png> <./Images/forw_ui.png>]
+<Images/demo_forw.png, id=324, 1191.45125pt x 533.995pt>
 File: Images/demo_forw.png Graphic file (type png)
 <use Images/demo_forw.png>
 Package pdftex.def Info: Images/demo_forw.png  used on input line 239.
@@ -1470,19 +1464,37 @@ File: Images/hcmut.png Graphic file (type png)
 <use Images/hcmut.png>
 Package pdftex.def Info: Images/hcmut.png  used on input line 175.
 (pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[13]
+[12]
 
 File: Images/hcmut.png Graphic file (type png)
 <use Images/hcmut.png>
 Package pdftex.def Info: Images/hcmut.png  used on input line 175.
 (pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[14 <./Images/demo_forw.png>] (inverse_kine.tex)
+[13 <./Images/demo_forw.png>] (inverse_kine.tex
+<Images/inv_ui.png, id=366, 380.42125pt x 173.64874pt>
+File: Images/inv_ui.png Graphic file (type png)
+<use Images/inv_ui.png>
+Package pdftex.def Info: Images/inv_ui.png  used on input line 11.
+(pdftex.def)             Requested size: 455.24408pt x 207.80777pt.
+
+
+File: Images/hcmut.png Graphic file (type png)
+<use Images/hcmut.png>
+Package pdftex.def Info: Images/hcmut.png  used on input line 33.
+(pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
+[14 <./Images/inv_ui.png>]
+<Images/inv_demo.png, id=384, 1188.44pt x 556.0775pt>
+File: Images/inv_demo.png Graphic file (type png)
+<use Images/inv_demo.png>
+Package pdftex.def Info: Images/inv_demo.png  used on input line 57.
+(pdftex.def)             Requested size: 455.24408pt x 213.00865pt.
+)
 
 File: Images/hcmut.png Graphic file (type png)
 <use Images/hcmut.png>
 Package pdftex.def Info: Images/hcmut.png  used on input line 177.
 (pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[15] (trajectory_plan.tex)
+[15 <./Images/inv_demo.png>] (trajectory_plan.tex)
 
 File: Images/hcmut.png Graphic file (type png)
 <use Images/hcmut.png>
@@ -1494,146 +1506,28 @@ File: Images/hcmut.png Graphic file (type png)
 <use Images/hcmut.png>
 Package pdftex.def Info: Images/hcmut.png  used on input line 181.
 (pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[17] (pathFinding.tex
+[17]
+
+Package hyperref Warning: Suppressing link with empty target on input line 200.
+
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 201.
+
+
+
 
 File: Images/hcmut.png Graphic file (type png)
 <use Images/hcmut.png>
-Package pdftex.def Info: Images/hcmut.png  used on input line 29.
+Package pdftex.def Info: Images/hcmut.png  used on input line 208.
 (pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
 [18]
 
 File: Images/hcmut.png Graphic file (type png)
 <use Images/hcmut.png>
-Package pdftex.def Info: Images/hcmut.png  used on input line 48.
+Package pdftex.def Info: Images/hcmut.png  used on input line 212.
 (pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[19]
-
-LaTeX Warning: File `Images/pathfinding/output.png' not found on input line 53.
-
-
-
-! Package pdftex.def Error: File `Images/pathfinding/output.png' not found: usi
-ng draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.53 ...\textwidth]{Images/pathfinding/output.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `Images/pathfinding/output2.png' not found on input line 60
-.
-
-
-! Package pdftex.def Error: File `Images/pathfinding/output2.png' not found: us
-ing draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.60 ...textwidth]{Images/pathfinding/output2.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-
-File: Images/hcmut.png Graphic file (type png)
-<use Images/hcmut.png>
-Package pdftex.def Info: Images/hcmut.png  used on input line 64.
-(pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[20]
-
-File: Images/hcmut.png Graphic file (type png)
-<use Images/hcmut.png>
-Package pdftex.def Info: Images/hcmut.png  used on input line 64.
-(pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[21]
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 70.
-
-
-File: Images/hcmut.png Graphic file (type png)
-<use Images/hcmut.png>
-Package pdftex.def Info: Images/hcmut.png  used on input line 112.
-(pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[22]
-
-File: Images/hcmut.png Graphic file (type png)
-<use Images/hcmut.png>
-Package pdftex.def Info: Images/hcmut.png  used on input line 163.
-(pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[23]
-Underfull \hbox (badness 10000) in paragraph at lines 199--215
-
- []
-
-
-
-File: Images/hcmut.png Graphic file (type png)
-<use Images/hcmut.png>
-Package pdftex.def Info: Images/hcmut.png  used on input line 215.
-(pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[24]
-
-File: Images/hcmut.png Graphic file (type png)
-<use Images/hcmut.png>
-Package pdftex.def Info: Images/hcmut.png  used on input line 236.
-(pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[25]
-
-LaTeX Warning: File `Images/pathfinding/output.png' not found on input line 242
-.
-
-
-! Package pdftex.def Error: File `Images/pathfinding/output.png' not found: usi
-ng draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.242 ...textwidth]{Images/pathfinding/output.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-
-File: Images/hcmut.png Graphic file (type png)
-<use Images/hcmut.png>
-Package pdftex.def Info: Images/hcmut.png  used on input line 256.
-(pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[26])
-
-Package hyperref Warning: Suppressing link with empty target on input line 202.
-
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 203.
-
-
-
-LaTeX Warning: Empty `thebibliography' environment on input line 207.
-
-
-
-File: Images/hcmut.png Graphic file (type png)
-<use Images/hcmut.png>
-Package pdftex.def Info: Images/hcmut.png  used on input line 208.
-(pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[27]
-
-File: Images/hcmut.png Graphic file (type png)
-<use Images/hcmut.png>
-Package pdftex.def Info: Images/hcmut.png  used on input line 208.
-(pdftex.def)             Requested size: 22.75891pt x 22.75835pt.
-[28] 
+[19] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (main.aux)
  ***********
@@ -1641,38 +1535,34 @@ LaTeX2e <2024-11-01>
 L3 programming layer <2024-11-02>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: AF2B51EC8BEB0E6736D3B94E179B2554;5802.
+(rerunfilecheck)             Checksum: 85535B149A74F7B562AB7BD4A7DC4342;5319.
  ) 
 Here is how much of TeX's memory you used:
- 29131 strings out of 475592
- 538718 string characters out of 5770615
- 1343902 words of memory out of 5000000
- 51191 multiletter control sequences out of 15000+600000
+ 29070 strings out of 475592
+ 536402 string characters out of 5770615
+ 1344902 words of memory out of 5000000
+ 51133 multiletter control sequences out of 15000+600000
  580822 words of font info for 88 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 84i,25n,93p,672b,2081s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,25n,93p,672b,2085s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </home/nhat/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.
-pk></home/nhat/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmex10.pfb
-></home/nhat/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
-/home/nhat/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi8.pfb></ho
-me/nhat/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr12.pfb></home/
-nhat/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr8.pfb></home/nhat
-/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy10.pfb></home/nhat/.
-miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy8.pfb></home/nhat/.mik
-tex/texmfs/install/fonts/type1/vntex/vnr/vnbx10.pfb></home/nhat/.miktex/texmfs/
-install/fonts/type1/vntex/vnr/vnbx12.pfb></home/nhat/.miktex/texmfs/install/fon
-ts/type1/vntex/vnr/vnbx9.pfb></home/nhat/.miktex/texmfs/install/fonts/type1/vnt
-ex/vnr/vnbxti10.pfb></home/nhat/.miktex/texmfs/install/fonts/type1/vntex/vnr/vn
-r10.pfb></home/nhat/.miktex/texmfs/install/fonts/type1/vntex/vnr/vnr12.pfb></ho
-me/nhat/.miktex/texmfs/install/fonts/type1/vntex/vnr/vnr5.pfb></home/nhat/.mikt
-ex/texmfs/install/fonts/type1/vntex/vnr/vnti12.pfb></home/nhat/.miktex/texmfs/i
-nstall/fonts/type1/vntex/vnr/vnti9.pfb></home/nhat/.miktex/texmfs/install/fonts
-/type1/vntex/vnr/vntt10.pfb></home/nhat/.miktex/texmfs/install/fonts/type1/vnte
-x/vnr/vntt12.pfb></home/nhat/.miktex/texmfs/install/fonts/type1/vntex/vnr/vntt8
-.pfb>
-Output written on main.pdf (29 pages, 702447 bytes).
+pk></home/nhat/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi12.pfb
+></home/nhat/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi8.pfb></
+home/nhat/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr12.pfb></hom
+e/nhat/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr8.pfb></home/nh
+at/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy8.pfb></home/nhat/
+.miktex/texmfs/install/fonts/type1/vntex/vnr/vnbx10.pfb></home/nhat/.miktex/tex
+mfs/install/fonts/type1/vntex/vnr/vnbx12.pfb></home/nhat/.miktex/texmfs/install
+/fonts/type1/vntex/vnr/vnbx9.pfb></home/nhat/.miktex/texmfs/install/fonts/type1
+/vntex/vnr/vnbxti10.pfb></home/nhat/.miktex/texmfs/install/fonts/type1/vntex/vn
+r/vnr12.pfb></home/nhat/.miktex/texmfs/install/fonts/type1/vntex/vnr/vnr5.pfb><
+/home/nhat/.miktex/texmfs/install/fonts/type1/vntex/vnr/vnti12.pfb></home/nhat/
+.miktex/texmfs/install/fonts/type1/vntex/vnr/vnti9.pfb></home/nhat/.miktex/texm
+fs/install/fonts/type1/vntex/vnr/vntt10.pfb></home/nhat/.miktex/texmfs/install/
+fonts/type1/vntex/vnr/vntt8.pfb>
+Output written on main.pdf (20 pages, 672875 bytes).
 PDF statistics:
- 631 PDF objects out of 1000 (max. 8388607)
+ 551 PDF objects out of 1000 (max. 8388607)
  226 named destinations out of 1000 (max. 500000)
- 285 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 247 words of extra memory for PDF output out of 10000 (max. 10000000)
 

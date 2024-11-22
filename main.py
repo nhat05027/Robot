@@ -278,7 +278,7 @@ def inverseKine():
 
 updateGuiVariable()
 frameView = LabelFrame(root, text='View', padx=10, pady=10)
-frameView.grid(row=0, column=0)
+frameView.grid(row=0, column=0, sticky = "ew")
 Label(frameView, text="Opacity", font='Helvetica 10').grid(row=0, column=0)
 scale1 = Scale(frameView, variable=guiOpacity, showvalue=0, resolution=1,  from_ = 0, to = 255,  orient = HORIZONTAL, length=200) 
 scale1.grid(row=0, column=1)
@@ -297,7 +297,7 @@ Label(frameView, text="Angle R | P | Y", font='Helvetica 10', fg="red").grid(row
 Label(frameView, textvariable=guiRPY, font='Helvetica 10').grid(row=6, column=1)
 
 frameForw = LabelFrame(root, text='Forward Kinematic', padx=10, pady=10)
-frameForw.grid(row=1, column=0)
+frameForw.grid(row=1, column=0, sticky = "ew")
 Label(frameForw, text="Forward Kinematic", font='Helvetica 10', fg="red").grid(row=0, columnspan = 3, column=0)
 for i in range(len(theta)):
     Label(frameForw, text="Theta "+str(i+1), font='Helvetica 10').grid(row=i+1, column=0)
@@ -308,7 +308,7 @@ for i in range(len(theta)):
 buttonForw = Button(frameForw, text="Execute", command=forwardKine, height=2, width=5).grid(row=4, column=2)
 
 frameInvrs = LabelFrame(root, text='Inverse Kinematic', padx=10, pady=10)
-frameInvrs.grid(row=2, column=0)
+frameInvrs.grid(row=2, column=0, sticky = "ew")
 Label(frameInvrs, text="Inverse Kinematic", font='Helvetica 10', fg="red").grid(row=0, columnspan = 3, column=0)
 for i, t in enumerate(["x ", "y ", "z "]):
     Label(frameInvrs, text=t, font='Helvetica 10').grid(row=i+1, column=0)
