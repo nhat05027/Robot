@@ -1,0 +1,29 @@
+\contentsline {section}{\numberline {1}GIỚI THIỆU}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Sơ lược về Articulated Arm Robot}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Giới thiệu về ngôn ngữ lập trình Python}{4}{subsection.1.2}%
+\contentsline {section}{\numberline {2}ĐỘNG HỌC THUẬN}{7}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Mô phỏng hình dạng Robot}{7}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Xác định các thông số và lập bảng DH}{7}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Xây dựng môi trường giả lập Robot}{8}{subsubsection.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.1.3}Vẽ Robot}{10}{subsubsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.2}Xây dựng UI và Animation cho bài toán động lực thuận}{11}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Giao điện người dùng UI}{11}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Tạo animation và di chuyển robot theo bài toán động lực thuận}{12}{subsubsection.2.2.2}%
+\contentsline {section}{\numberline {3}ĐỘNG HỌC NGHỊCH}{15}{section.3}%
+\contentsline {subsection}{\numberline {3.1}DH-Table}{15}{subsection.3.1}%
+\contentsline {section}{\numberline {4}QUY HOẠCH QUỸ ĐẠO TRAJECTORY PLANNING}{16}{section.4}%
+\contentsline {subsection}{\numberline {4.1}DH-Table}{16}{subsection.4.1}%
+\contentsline {section}{\numberline {5}MA TRẬN JACOBI VÀ ĐIỂM KÌ DỊ}{17}{section.5}%
+\contentsline {subsection}{\numberline {5.1}DH-Table}{17}{subsection.5.1}%
+\contentsline {section}{\numberline {6}Path Finding}{18}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Sơ lược về bài toán}{18}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Những đánh giá về game}{18}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Giao diện trực quan hóa}{19}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Xây dựng các cấu trúc để mô phỏng bài toán}{22}{subsection.6.4}%
+\contentsline {subsubsection}{\numberline {6.4.1}Cấu trúc file \texttt {astar.py}}{22}{subsubsection.6.4.1}%
+\contentsline {subsubsection}{\numberline {6.4.2}Cấu trúc file \texttt {map.py}}{22}{subsubsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.5}Định nghĩa không gian trạng thái}{23}{subsection.6.5}%
+\contentsline {subsection}{\numberline {6.6}A* Search}{24}{subsection.6.6}%
+\contentsline {section}{\numberline {7}ĐÁNH GIÁ CHUNG VÀ KẾT LUẬN}{27}{section.7}%
+\contentsline {section}{\numberline {8}VIDEO DEMO VÀ CODE PYTHON}{27}{section.8}%
+\contentsline {section}{Tài liệu}{27}{section.8}%

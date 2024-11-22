@@ -44,12 +44,11 @@
 \usepackage[unicode]{hyperref}
 \lstset{
   breaklines=true,
-  xleftmargin=25pt,
-  xrightmargin=25pt,
-  aboveskip=10pt,
-  belowskip=10pt,
-  basicstyle=\ttfamily,
-  backgroundcolor=\color{lightgray},
+  xleftmargin=15pt,
+  xrightmargin=15pt,
+  aboveskip=5pt,
+  belowskip=5pt,
+  backgroundcolor=\color{white},
   showstringspaces=false,
   frame=ltrb,
   language=python,
@@ -57,10 +56,12 @@
   numbers=left,
   numberstyle=\small,
   numbersep=8pt,
-  morekeywords={*, factorial, sum, erlang},
-  keywordstyle=\color{purple}\textbf,
-  commentstyle=\color{blue}\textit,
-  stringstyle=\color{red}
+  morekeywords={*, cos, sum, sin, np, pygame},
+  commentstyle=\color{cgreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{cgray},
+  stringstyle=\color{cpurple},
+  basicstyle=\ttfamily\footnotesize,
 }
 
 \def\thesislayout{	% A4: 210 × 297
@@ -108,7 +109,7 @@
 
 
 \sloppy
-\captionsetup[figure]{labelfont={small,bf},textfont={small,it},belowskip=-1pt,aboveskip=-9pt}
+\captionsetup[figure]{labelfont={small,bf},textfont={small,it},belowskip=-1pt,aboveskip=7pt}
 \captionsetup[table]{labelfont={small,bf},textfont={small,it},belowskip=-1pt,aboveskip=7pt}
 \setlength{\floatsep}{5pt plus 2pt minus 2pt}
 \setlength{\textfloatsep}{5pt plus 2pt minus 2pt}

@@ -6,19 +6,20 @@ from tkinter import *
 import tkinter.messagebox 
 
 # % Link | d   | theta        |   a   | alpha
-# % 1      d1    theta_1         0       90
-# % 2      0     theta_2         a2      0
-# % 3      0     theta_3         a3     0
+# % 1      d1    theta_1          0      90
+# % 2      0     theta_2         a2       0
+# % 3      0     theta_3         a3       0 
 d = np.array([100, 0, 0])
 a = np.array([0, 100, 100])
 alpha = np.array([pi/2, 0, 0])
-
 theta = np.array([0, 0, 0])
 offsetTheta = np.array([0, 0, 0])
+
 limitTheta = np.array([[-pi, pi], [-pi, pi], [-pi, pi]])
 animateArray = np.array([])
 travelArray = np.array([])
 
+# Hàm tính toán ma trận DH
 def DH_Matrix(d, theta, a, alpha):
     c = cos(theta)
     s = sin(theta)
@@ -31,6 +32,7 @@ def DH_Matrix(d, theta, a, alpha):
         [0, 0, 0, 1],
     ])
 
+# Hàm tìm các ma trận biến đổi thuần nhất T0, T1, T2, T3, T4
 def updateTranposeMatrix():
     T0 = np.eye(4)
     T1 = np.dot(T0, DH_Matrix(d[0], theta[0]+offsetTheta[0], a[0], alpha[0]))
@@ -38,6 +40,7 @@ def updateTranposeMatrix():
     T3 = np.dot(T2, DH_Matrix(d[2], theta[2]+offsetTheta[2], a[2], alpha[2]))
     return [T0, T1, T2, T3]
 
+# Unit vector
 baseO = np.array([0, 0, 0])
 baseX = np.array([50, 0, 0])
 baseY = np.array([0, 50, 0])
