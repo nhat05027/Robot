@@ -1,5 +1,30 @@
 \section{ĐỘNG HỌC NGHỊCH}
 \subsection{Lập công thức giải bài toán động học nghịch}
+Ta sẽ tính toán các công thức động học ngược robot từ bài toán động lực thuận.
+\begin{center}
+	\begin{tabular}{|m{2cm}|m{2cm}|m{2cm}|m{2cm}|m{2cm}|} 
+		\hline
+		Link & $a_{i}$ & $\alpha_{i}$ & $d_{i}$ & $\theta_{i}$\\ [0.5ex] 
+		\hline
+		1 & 0 & $\pi/2$ & $d_{1}$ & $\theta_{1}^{*}$\\ 
+		\hline
+		2 & $a_{2}$ & 0 & 0 & $\theta_{2}^{*}$\\
+		\hline
+		3 & $a_{3}$ & 0 & 0 & $\theta_{3}^{*}$\\ [0.5ex] 
+		\hline
+	\end{tabular}
+\end{center}
+
+\begin{center}
+$^{0}T_{3} = {^{0}T_{1}} {^{1}T_{2}} {^{2}T_{3}} = \begin{bmatrix}
+	c_{1}c_{23} & -c_{1}s_{23} & s_{1} & c_{1}(a_{2}c_{2}+a_{3}c_{23})\\
+	s_{1}c_{23} & -s_{1}s_{23} & -c_{1} & s_{1}(a_{2}c_{2}+a_{3}c_{23})\\
+	s_{23} & c_{23} & 0 & d_{1}+ a_{2}s_{2}+a_{3}s_{23}\\
+	0 & 0 & 0 & 1
+\end{bmatrix}$
+\end{center}
+
+Với input $
 
 \subsection{Xây dựng UI và Animation cho bài toán động lực nghịch}
 \subsubsection{Giao điện người dùng UI}
