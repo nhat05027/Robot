@@ -20,4 +20,4 @@
 \contentsline {subsection}{\numberline {5.1}DH-Table}{17}{subsection.5.1}%
 \contentsline {section}{\numberline {6}ĐÁNH GIÁ CHUNG VÀ KẾT LUẬN}{18}{section.6}%
 \contentsline {section}{\numberline {7}VIDEO DEMO VÀ CODE PYTHON}{18}{section.7}%
-\contentsline {section}{Tài liệu}{18}{section.7}%
+\contentsline {section}{Tài liệu tham khảo}{18}{section.7}%
