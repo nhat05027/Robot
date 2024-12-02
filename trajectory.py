@@ -18,7 +18,7 @@ else:
 
 print(t1, t2, t3)
 
-t = np.arange(0, t3, 0.05)
+t = np.arange(0, t3, 0.01)
 
 qt = np.zeros(len(t), dtype=float)
 vt = np.zeros(len(t), dtype=float)
@@ -40,9 +40,9 @@ for i, tt in enumerate(t):
     else:
         at[i] = -amax
         vt[i] = amax*t1 + at[i]*(tt-t2)
-        qt[i] = 0.5*amax*t1**2 + amax*t1*(t2-t1) + 0.5*amax*(tt-t2)**2
+        qt[i] = 0.5*amax*t1**2 + amax*t1*(t2-t1) + amax*t1*(tt-t2) - 0.5*amax*(tt-t2)**2
 
-
+print(qt[-1])
 figure, axis = plt.subplots(2, 2)
 
 # q(t)
