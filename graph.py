@@ -4,9 +4,9 @@ import matplotlib.animation as animation
 
 figure, axis = plt.subplots(3, 3)
 
-axis[0, 0].set_title("q(t)")
-axis[1, 0].set_title("v(t)")
-axis[2, 0].set_title("a(t)")
+# axis[0, 0].set_title("q(t)")
+# axis[1, 0].set_title("v(t)")
+# axis[2, 0].set_title("a(t)")
 
 def animate(j):
     graph_data = open('data.txt','r').read()
@@ -33,8 +33,8 @@ def animate(j):
         axis[2, i].clear()
 
         axis[0, i].plot(t, qt[i])
-        axis[1, i].plot(t, vt[i])
-        axis[2, i].plot(t, at[i])
+        axis[1, i].plot(t, vt[i], 'g')
+        axis[2, i].plot(t, at[i], 'r')
 
 ani = animation.FuncAnimation(figure, animate, interval=30, cache_frame_data=False)
 plt.show()
