@@ -58,7 +58,7 @@ BLUE = (0, 0, 255)
 YELLOW = (247, 253, 4)
 ORANGE = (251, 147, 0)
 BLACK = (0, 0, 0)
-WIDTH, HEIGHT = 800, 500
+WIDTH, HEIGHT = 1400, 800
 circle_pos = [WIDTH/2, HEIGHT*3/4]  # x, y
 pygame.display.set_caption("3D")
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -164,7 +164,7 @@ def calRPY(T):
 
 clock = pygame.time.Clock()
 def pygameMain():
-    global angleX,angleY,angleZ,scale
+    global angleX,angleY,angleZ,scale,YLst, XLst,i
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -202,6 +202,7 @@ def pygameMain():
             drawCoor(screen, DHtranspose(baseO, t), DHtranspose(baseX, t), DHtranspose(baseY, t), DHtranspose(baseZ, t))
     if isDrawTravel.get() == 1:
         drawTravel(screen)
+
     pygame.display.update()
     root.update()
     clock.tick(30)
