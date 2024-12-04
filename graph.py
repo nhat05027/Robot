@@ -9,7 +9,7 @@ axis[1, 0].set_title("v(t)")
 axis[2, 0].set_title("a(t)")
 
 def animate(j):
-    graph_data = open('example.txt','r').read()
+    graph_data = open('data.txt','r').read()
     lines = graph_data.split('\n')
     t = []
     qt = [[], [], []]

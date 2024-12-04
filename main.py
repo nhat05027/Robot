@@ -18,6 +18,8 @@ offsetTheta = np.array([0, 0, 0])
 limitTheta = np.array([[-pi, pi], [-pi, pi], [-pi, pi]])
 animateArray = np.array([])
 travelArray = np.array([])
+velocArray = np.array([])
+accelArray = np.array([])
 
 # Hàm tính toán ma trận DH
 def DH_Matrix(d, theta, a, alpha):
@@ -58,7 +60,7 @@ BLUE = (0, 0, 255)
 YELLOW = (247, 253, 4)
 ORANGE = (251, 147, 0)
 BLACK = (0, 0, 0)
-WIDTH, HEIGHT = 1400, 800
+WIDTH, HEIGHT = 1000, 600
 circle_pos = [WIDTH/2, HEIGHT*3/4]  # x, y
 pygame.display.set_caption("3D")
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -133,11 +135,39 @@ def drawMachine(opacity, T):
     drawLine(s, DHtranspose(baseO, T[2]), DHtranspose(baseO, T[3]), color=(230,0,180,opacity), width=5)
     screen.blit(s, (0,0))
 
+startTime = 0
+def resetfile():
+    global startTime
+    if isTraject.get() == 1:
+        startTime = 0
+        file1 = open("data.txt", "w") 
+        lst = '0,0,0,0,0,0,0,0,0,0 \n'
+        file1.write(lst) 
+        file1.close()
+
 def updateTheta():
-    global theta, animateArray, travelArray
+    global theta, animateArray, velocArray, accelArray, travelArray, startTime
     if animateArray.size > 0:
         theta = animateArray[0]
         animateArray = animateArray[1:]
+    
+        if isTraject.get() == 1:
+            veloc = velocArray[0]
+            accel = accelArray[0]
+            velocArray = velocArray[1:]
+            accelArray = accelArray[1:]
+
+            startTime = startTime+0.0333
+            file1 = open("data.txt", "a") 
+            lst = str(startTime)
+            for i in range(3):
+                lst = lst + ", " + str(theta[i]*180/pi)
+                lst = lst + ", " + str(veloc[i])
+                lst = lst + ", " + str(accel[i])
+            lst = lst + '\n'
+            file1.write(lst) 
+            file1.close()
+
     T = updateTranposeMatrix()
     for i in range(2):
         guiCoor[i].set(coor2str(DHtranspose(baseO, T[i+2])))
@@ -213,14 +243,22 @@ root.title("Control Panel")
 guiTheta = [DoubleVar(), DoubleVar(), DoubleVar()]
 guiCoorInv = [DoubleVar(), DoubleVar(), DoubleVar()]
 guiThetaInv = [DoubleVar(), DoubleVar(), DoubleVar()]
+guiVeloc = [DoubleVar(), DoubleVar(), DoubleVar()]
+guiAccel = [DoubleVar(), DoubleVar(), DoubleVar()]
 guiOpacity = DoubleVar()
 isDrawCoor = IntVar()
+isTraject = IntVar()
 isDrawTravel = IntVar()
 guiOpacity.set(125)
 isDrawCoor.set(1)
 isDrawTravel.set(1)
+isTraject.set(0)
 guiCoor = [StringVar(), StringVar()]
 guiRPY = StringVar()
+
+for i in range(3):
+    guiVeloc[i].set(10)
+    guiAccel[i].set(20)
 
 def updateGuiVariable():
     global guiTheta
@@ -236,16 +274,100 @@ def animateTranform(nextTheta, stepAngle, deltaTime):
     animateArray = np.append(animateArray, nextTheta)
     animateArray = np.reshape(animateArray, (-1,3))
     travelArray = np.array([])
+def checkVelAcel():
+    for i in range(3):
+        if guiAccel[i].get() <= 0:
+            return 1
+        if guiVeloc[i].get() <= 0:
+            return 1
+    return 0
+def lspb(q0, qn, vmax, amax):
+    if q0 == qn:
+        return np.zeros(1), np.array([q0]), np.zeros(1), np.zeros(1)
+    q0 = q0*180/pi
+    qn = qn*180/pi
+    qmax = qn-q0
+    if qmax < 0:
+        amax = -amax
+        vmax = -vmax
+    t1 = round((vmax/amax)/0.0333)*0.0333
+
+    if abs(qmax) < abs(amax*t1**2):
+        t1 = round(np.sqrt(0.333*qmax*2/amax)/0.0333)*0.0333
+        t2 = round(((qmax-amax*t1**2)/(amax*t1))/0.0333)*0.0333 + t1
+        t3 = t2+t1
+
+    else:
+        t2 = round(((qmax-amax*t1**2)/vmax)/0.0333)*0.0333 + t1
+        t3 = t2+t1
+
+    t = np.arange(0, t3, 0.0333)
+
+    qt = np.zeros(len(t), dtype=float)
+    vt = np.zeros(len(t), dtype=float)
+    at = np.zeros(len(t), dtype=float)
+
+    for i, tt in enumerate(t):
+        if tt <= t1:
+            at[i] = amax
+            vt[i] = at[i]*tt
+            qt[i] = q0 + 0.5*at[i]*tt**2
+        elif tt <= t2:
+            at[i] = 0
+            vt[i] = amax*t1
+            qt[i] = q0 + 0.5*amax*t1**2 + vt[i]*(tt-t1)
+        else:
+            at[i] = -amax
+            vt[i] = amax*t1 + at[i]*(tt-t2)
+            qt[i] = q0 + 0.5*amax*t1**2 + amax*t1*(t2-t1) + amax*t1*(tt-t2) - 0.5*amax*(tt-t2)**2
+    qt[-1] = qn
+    vt[-1] = 0
+    return t, qt*pi/180, vt, at
+def trajectory(nextTheta):
+    global animateArray, velocArray, accelArray, travelArray
+    t1, qt1, vt1, at1 = lspb(theta[0], nextTheta[0], guiVeloc[0].get(), guiAccel[0].get())
+    t2, qt2, vt2, at2 = lspb(theta[1], nextTheta[1], guiVeloc[1].get(), guiAccel[1].get())
+    t3, qt3, vt3, at3 = lspb(theta[2], nextTheta[2], guiVeloc[2].get(), guiAccel[2].get())
+    t = max(len(t1), len(t2), len(t3))
+    for i in range(t-len(t1)):
+        qt1 = np.append(qt1, nextTheta[0])
+        vt1 = np.append(vt1, 0)
+        at1 = np.append(at1, 0)
+    for i in range(t-len(t2)):
+        qt2 = np.append(qt2, nextTheta[1])
+        vt2 = np.append(vt2, 0)
+        at2 = np.append(at2, 0)
+    for i in range(t-len(t3)):
+        qt3 = np.append(qt3, nextTheta[2])
+        vt3 = np.append(vt3, 0)
+        at3 = np.append(at3, 0)
+
+    for j in range(t):
+        animateArray = np.append(animateArray, np.array([qt1[j], qt2[j], qt3[j]]))
+        velocArray = np.append(velocArray, np.array([vt1[j], vt2[j], vt3[j]]))
+        accelArray = np.append(accelArray, np.array([at1[j], at2[j], at3[j]]))
+    animateArray = np.reshape(animateArray, (-1,3))
+    velocArray = np.reshape(velocArray, (-1,3))
+    accelArray = np.reshape(accelArray, (-1,3))
+    travelArray = np.array([])
 def forwardKine():
+    resetfile()
     deltaTime = 60
     nextTheta = np.array([guiTheta[0].get()*pi/180, guiTheta[1].get()*pi/180, guiTheta[2].get()*pi/180])
     stepAngle = np.array([(nextTheta[0]-theta[0])/deltaTime, (nextTheta[1]-theta[1])/deltaTime, (nextTheta[2]-theta[2])/deltaTime])
-    animateTranform(nextTheta, stepAngle, deltaTime)
+    if isTraject.get() == 1:
+        if checkVelAcel():
+            tkinter.messagebox.showwarning("Trajectory Planning.",  "Invalid velocity or accelaration!")
+        else:
+            trajectory(nextTheta)
+    else:
+        animateTranform(nextTheta, stepAngle, deltaTime)
 def inverseKine():
     global guiThetaInv
     px = guiCoorInv[0].get()
     py = guiCoorInv[1].get()
     pz = guiCoorInv[2].get()-d[0]
+    resetfile()
     # Check valid
     valid = 0
     tmp = (px**2+py**2+pz**2)**0.5
@@ -273,7 +395,13 @@ def inverseKine():
         deltaTime = 60
         nextTheta = np.array([theta1, theta2, theta3])
         stepAngle = np.array([(nextTheta[0]-theta[0])/deltaTime, (nextTheta[1]-theta[1])/deltaTime, (nextTheta[2]-theta[2])/deltaTime])
-        animateTranform(nextTheta, stepAngle, deltaTime)
+        if isTraject.get() == 1:
+            if checkVelAcel():
+                tkinter.messagebox.showwarning("Trajectory Planning.",  "Invalid velocity or accelaration!")
+            else:
+                trajectory(nextTheta)
+        else:
+            animateTranform(nextTheta, stepAngle, deltaTime)
     else:
         tkinter.messagebox.showwarning("Inverse Kinematic.",  "Out of workspace")
 
@@ -318,6 +446,19 @@ for i, t in enumerate(["x ", "y ", "z "]):
     Label(frameInvrs, text="Theta "+str(i+1) + ":", font='Helvetica 10').grid(row=i+1, column=2)
     Label(frameInvrs, textvariable=guiThetaInv[i], font='Helvetica 10').grid(row=i+1, column=3)
 buttonInvrs = Button(frameInvrs, text="Execute", command=inverseKine, height=2, width=5).grid(row=4, column=2)
+
+frameTrajec = LabelFrame(root, text='Trajectory Planning', padx=10, pady=10)
+frameTrajec.grid(row=3, column=0, sticky = "ew")
+Label(frameTrajec, text="Velocity", font='Helvetica 10', fg="red").grid(row=0, column=1)
+Label(frameTrajec, text="Acceleration", font='Helvetica 10', fg="red").grid(row=0, column=2)
+c3 = Checkbutton(frameTrajec, text='Trajectory Planning',variable=isTraject, onvalue=1, offvalue=0)
+c3.grid(row=0, column=0)
+for i, t in enumerate(["Joint1 ", "Joint2 ", "Joint3 "]):
+    Label(frameTrajec, text=t, font='Helvetica 10').grid(row=i+1, column=0)
+    entry4 = Entry(frameTrajec, textvariable=guiVeloc[i], width=10)
+    entry4.grid(row=i+1, column=1)
+    entry5 = Entry(frameTrajec, textvariable=guiAccel[i], width=10)
+    entry5.grid(row=i+1, column=2)
 
 while True:
     pygameMain()
