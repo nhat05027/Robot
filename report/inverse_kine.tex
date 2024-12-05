@@ -24,7 +24,20 @@ $^{0}T_{3} = {^{0}T_{1}} {^{1}T_{2}} {^{2}T_{3}} = \begin{bmatrix}
 \end{bmatrix}$
 \end{center}
 
-Với input $3$
+Với input $Pw_x, Pw_y, Pw_z$ ta lập được công thức tính các góc $\theta_{1}$ , $\theta_{2}$ và $\theta_{3}$:
+\begin{itemize}
+	\item $\theta_3 = atan2(s_3, c_3) $ với:
+	\begin{itemize} 
+		\item $c_3 =\frac{{Pw_x}^2+{Pw_y}^2+{Pw_z}^2-{a_1}^2-{a_2}^2}{2a_1a_2}$  
+		\item $s_3=\sqrt{1-{c_3}^2}$
+	\end{itemize}
+	\item $\theta_2 = \alpha - \beta$ với:
+	\begin{itemize}
+		\item $\alpha = atan2(Pw_z, \sqrt{{Pw_x}^2+{Pw_y}^2})$  
+		\item $\beta = cos^{-1}(\frac{{Pw_x}^2+{Pw_y}^2+{Pw_z}^2+{a_1}^2-{a_2}^2}{2a_1\sqrt{{Pw_x}^2+{Pw_y}^2+{Pw_z}^2}})$
+	\end{itemize}
+	\item $\theta_1 = atan2(Pw_y, Pw_x)$
+\end{itemize}
 
 \subsection{Xây dựng UI và Animation cho bài toán động lực nghịch}
 \subsubsection{Giao điện người dùng UI}
@@ -40,7 +53,7 @@ Xây dựng giao diện để người dùng nhập tọa độ vị trí của 
 
 \subsubsection{Tạo animation và di chuyển robot theo bài toán động lực nghịch}
 
-Dựa vào các công thức đã lập được ở trên và các giá trị $x$, $y$ và $z$ do người dùng nhập ta tính ngược lại giá trị các góc $\theta_{1}$ , $\theta_{2}$ và $\theta_{3}$, sau khi kiểm tra các góc xaoy có nằm trong phạm vi giới hạn quya của từng khớp ta tiến hành cho robot chuyển động giống như bài toán thuận theo các giá trị $\theta$ vừa tính được ở trên.
+Dựa vào các công thức đã lập được ở trên và các giá trị $x$, $y$ và $z$ do người dùng nhập ta tính ngược lại giá trị các góc $\theta_{1}$ , $\theta_{2}$ và $\theta_{3}$, sau khi kiểm tra các góc xoay có nằm trong phạm vi giới hạn quya của từng khớp ta tiến hành cho robot chuyển động giống như bài toán thuận theo các giá trị $\theta$ vừa tính được ở trên.
 
 \vspace{0.5cm}
 \begin{lstlisting}[language=python]
